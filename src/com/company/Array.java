@@ -152,6 +152,34 @@ public class Array {
         return newDigits;
     }
 
+    public int[] merge(int[] nums1, int m, int[] nums2, int n) {
+        if (n == 0) return nums1;
+
+        for (int i = m + n - 1; i >= 0; i--) {
+            if (m == 0 || n == 0) break;
+
+            int num1 = nums1[m - 1];
+            int num2 = nums2[n - 1];
+
+            if (num2 < num1) {
+                nums1[i] = num1;
+                m--;
+            }
+
+            if (num1 <= num2) {
+                nums1[i] = num2;
+                n--;
+            }
+        }
+
+        if (n > 0) {
+            for (int i = 0; i < n; i++)
+                nums1[i] = nums2[i];
+        }
+
+        return nums1;
+    }
+
     public void print() {
         for (int i = 0; i < count; i++)
             System.out.println(items[i]);
